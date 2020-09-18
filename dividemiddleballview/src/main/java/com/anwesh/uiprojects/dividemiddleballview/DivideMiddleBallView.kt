@@ -213,4 +213,13 @@ class DivideMiddleBallView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : DivideMiddleBallView {
+            val view : DivideMiddleBallView = DivideMiddleBallView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }

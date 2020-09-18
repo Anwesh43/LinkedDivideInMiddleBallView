@@ -21,12 +21,11 @@ val colors : Array<Int> = arrayOf(
         "#FFEB3B"
 ).map({Color.parseColor(it)}).toTypedArray()
 val scGap : Float = 0.02f / parts
-val strokeFactor : Float = 90f
 val rFactor : Float = 14.2f
 val foreColor : Int = Color.parseColor("#BDBDBD")
 val delay : Long = 20
-val xFactor : Float = 0.35f
-val yFactor : Float = 0.3f
+val xFactor : Float = 0.25f
+val yFactor : Float = 0.1f
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
@@ -41,8 +40,8 @@ fun Canvas.drawDivideBallView(scale : Float, w : Float, h : Float, paint : Paint
     val sc5 : Float = scale.divideScale(4, parts)
     val r : Float = Math.min(w, h) / rFactor
     val currX : Float = (w - 2 * r) * xFactor
-    val wLeft : Float = w - 2 * currX
-    val x : Float = currX * sc2 + (wLeft) * sc3 + currX * sc4
+    val wLeft : Float = w - currX
+    val x : Float = -w / 2 + r + currX * 0.5f * sc2 + (wLeft) * sc3 + currX * 0.5f * sc4
     val y : Float = yFactor * h * sc3.sinify()
     save()
     translate(w / 2, h / 2)

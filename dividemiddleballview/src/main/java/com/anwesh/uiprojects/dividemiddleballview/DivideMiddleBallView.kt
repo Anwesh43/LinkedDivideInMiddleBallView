@@ -188,4 +188,27 @@ class DivideMiddleBallView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : DivideMiddleBallView) {
+
+        private val animator : Animator = Animator(view)
+        private val dmb : DivideMiddleBall = DivideMiddleBall(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(foreColor)
+            dmb.draw(canvas, paint)
+            animator.animate {
+                dmb.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            dmb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
